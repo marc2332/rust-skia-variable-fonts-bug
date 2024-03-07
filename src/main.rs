@@ -1,4 +1,3 @@
-use skia_safe::{surfaces, EncodedImageFormat};
 pub use skia_safe::{
     font_style::{Slant, Weight, Width},
     gpu::{
@@ -19,11 +18,11 @@ pub use skia_safe::{
         TextDecoration, TextDecorationStyle, TextDirection, TextHeightBehavior, TextIndex,
         TextRange, TextShadow, TextStyle, TypefaceFontProvider,
     },
-    BlurStyle, ClipOp, Color, ColorSpace, ColorType, Data, FilterMode, FontArguments,
-    FontMgr, FontStyle, IRect, Image, MaskFilter, Matrix, Paint, PaintStyle, Path, PathDirection,
-    Point, RRect, Rect, RuntimeEffect, Shader, Surface, TileMode, Typeface, HSV, RGB,
+    BlurStyle, ClipOp, Color, ColorSpace, ColorType, Data, FilterMode, FontArguments, FontMgr,
+    FontStyle, IRect, Image, MaskFilter, Matrix, Paint, PaintStyle, Path, PathDirection, Point,
+    RRect, Rect, RuntimeEffect, Shader, Surface, TileMode, Typeface, HSV, RGB,
 };
-
+use skia_safe::{surfaces, EncodedImageFormat};
 
 use std::fs::File;
 use std::io::Write;
@@ -46,11 +45,13 @@ fn main() {
     let mut font_collection = FontCollection::new();
     font_collection.set_default_font_manager(def_mgr, "inter-variable");
     font_collection.set_dynamic_font_manager(font_mgr);
-
     let paragraph_style = ParagraphStyle::default();
     let mut paragraph_builder = ParagraphBuilder::new(&paragraph_style, font_collection);
     let mut text_style = TextStyle::new();
+
+    // Hmm
     let font_style = FontStyle::new(Weight::EXTRA_BOLD, Width::NORMAL, Slant::Upright);
+
     text_style.set_font_style(font_style);
     text_style.set_color(Color::BLACK);
     text_style.set_font_size(50.);
@@ -59,6 +60,7 @@ fn main() {
     let mut paragraph = paragraph_builder.build();
     paragraph.layout(350.);
     paragraph.paint(surface.canvas(), (0., 0.));
+
     let image = surface.image_snapshot();
     let mut context = surface.direct_context();
     let data = image
