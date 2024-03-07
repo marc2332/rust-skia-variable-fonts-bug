@@ -28,15 +28,25 @@ pub use skia_safe::{
 use std::fs::File;
 use std::io::Write;
 
+static INTER_VARIABLE: &[u8] = include_bytes!("../inter-variable.ttf");
+
 fn main() {
     let mut surface = surfaces::raster_n32_premul((500, 500)).expect("surface");
     let mut paint = Paint::default();
     paint.set_color(Color::BLACK);
     paint.set_anti_alias(true);
     surface.canvas().clear(Color::WHITE);
-    let font_mgr = FontMgr::new();
+
+    let def_mgr = FontMgr::default();
+    let mut provider = TypefaceFontProvider::new();
+    let typeface = def_mgr.new_from_data(INTER_VARIABLE, None).unwrap();
+    provider.register_typeface(typeface, Some("inter-variable"));
+
+    let font_mgr: FontMgr = provider.into();
     let mut font_collection = FontCollection::new();
-    font_collection.set_default_font_manager(font_mgr.clone(), "Inter");
+    font_collection.set_default_font_manager(def_mgr, "inter-variable");
+    font_collection.set_dynamic_font_manager(font_mgr);
+
     let paragraph_style = ParagraphStyle::default();
     let mut paragraph_builder = ParagraphBuilder::new(&paragraph_style, font_collection);
     let mut text_style = TextStyle::new();
