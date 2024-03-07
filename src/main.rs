@@ -30,7 +30,7 @@ use std::io::Write;
 static INTER_VARIABLE: &[u8] = include_bytes!("../inter-variable.ttf");
 
 fn main() {
-    let mut surface = surfaces::raster_n32_premul((500, 500)).expect("surface");
+    let mut surface = surfaces::raster_n32_premul((500, 150)).expect("surface");
     let mut paint = Paint::default();
     paint.set_color(Color::BLACK);
     paint.set_anti_alias(true);
@@ -50,7 +50,7 @@ fn main() {
     let mut text_style = TextStyle::new();
 
     // Hmm
-    let font_style = FontStyle::new(Weight::EXTRA_BOLD, Width::NORMAL, Slant::Upright);
+    let font_style = FontStyle::new(Weight::NORMAL, Width::NORMAL, Slant::Upright);
 
     text_style.set_font_style(font_style);
     text_style.set_color(Color::BLACK);
