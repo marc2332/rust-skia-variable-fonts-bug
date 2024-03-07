@@ -5,3 +5,6 @@ edition = "2021"
 
 [dependencies]
 skia-safe = { version = "*", features = ["gl", "textlayout", "svg"] }
+
+[target."cfg(target_os = \"linux\")".dependencies.skia-safe]
+features = ["gl", "textlayout", "svg", "x11", "wayland"]
