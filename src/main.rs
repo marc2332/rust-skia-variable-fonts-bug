@@ -50,7 +50,7 @@ fn main() {
     let paragraph_style = ParagraphStyle::default();
     let mut paragraph_builder = ParagraphBuilder::new(&paragraph_style, font_collection);
     let mut text_style = TextStyle::new();
-    let font_style = FontStyle::new(Weight::NORMAL, Width::EXTRA_CONDENSED, Slant::Upright);
+    let font_style = FontStyle::new(Weight::EXTRA_BOLD, Width::NORMAL, Slant::Upright);
     text_style.set_font_style(font_style);
     text_style.set_color(Color::BLACK);
     text_style.set_font_size(50.);
