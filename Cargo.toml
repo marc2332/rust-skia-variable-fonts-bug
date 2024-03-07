@@ -1,0 +1,7 @@
+[package]
+name = "rust-skia-variable-fonts"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+skia-safe = { version = "*", features = ["gl", "textlayout", "svg"] }
